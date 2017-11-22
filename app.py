@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import random
 
@@ -16,6 +17,7 @@ choices=["Shhh, I\'m learning!", "Beep boop", "Don't @ me", "Pls don\'t yell at 
 @app.route('/', methods=['POST'])
 def webhook():
     data = request.get_json()
+    log('Recieved {}'.format(data))
 
     if data['name'] != 'Baby Botify': #TODO: Add creator msg!
         if '@bbb' in data['text'] or '@BBB' in data['text']:
@@ -29,7 +31,7 @@ def send_message(msg):
     url = 'https://api.groupme.com/v3/bots/post'
 
     data = {
-            'bot_id' : os.getenv('GROUPME_BOT_ID'),
+            'bot_id' : 'b7fc39f3a81ce8245b2a6ed00f',
             'text' : msg,
             }
     request = Request(url, urlencode(data).encode())
@@ -46,6 +48,9 @@ def store_message(msg):
     #TODO: Store msg into DB
     pass
 
+def log(msg):
+    print(str(msg))
+    sys.stdout.flush()
 
 if __name__ == "__main__":
     app.run()
