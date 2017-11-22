@@ -45,3 +45,7 @@ def gen_response():
 def store_message(msg):
     #TODO: Store msg into DB
     pass
+
+
+if __name__ == "__main__":
+    app.run()
